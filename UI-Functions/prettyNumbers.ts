@@ -16,3 +16,8 @@ export const calculateWages = (shifts: ShiftType[]) => {
 
     return { niceWage, expectedWage, averageWage };
 };
+
+
+export const niceNumbers = (number: number) => {
+    return number.toLocaleString('he').split(" . ")[0]
+};

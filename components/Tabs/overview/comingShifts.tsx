@@ -11,7 +11,7 @@ function UpComingShifts({shifts}:{shifts: ShiftType[]}) {
   })
   
   return (
-        <Card className='w-full mx-2'>
+        <Card className='w-full mx-2 p-8 min-h-[350px]'>
         <CardHeader>Coming Shifts</CardHeader>
         <CardContent>
            {filteredShifts.map((shift: ShiftType, index: number)=> {

@@ -1,0 +1,48 @@
+.bar-chart {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bar {
+  width: 45px;
+  padding:  .3rem;
+  margin-right: 10px;
+  border-top-left-radius: .2rem;
+  border-top-right-radius: .2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.bar span {
+  margin-top: 5px;
+  color: #fff;
+  font-size: 12px;
+}
+.axis-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.y-axis span {
+  margin-bottom: 5px;
+}
+
+.x-axis {
+  display: flex;
+}
+
+.x-axis span {
+  margin-top: 5px;
+  margin-right: 10px;
+}

@@ -46,7 +46,10 @@ function OverviewTab({ userID }: { userID: string }) {
 	];
 	return (
 		<>
-			<div className="w-full flex flex-col md:flex-row justify-evenly items-center my-4 p-0">
+			{activeProfileShifts.length > 0 ? (
+				<>
+
+				<div className="w-full flex flex-col md:flex-row justify-evenly items-center my-4 p-0">
 				{statsCards.map((card: any, index: number) => {
 					return (
 						<Suspense key={index} fallback={<CardSkeleton />}>
@@ -56,9 +59,13 @@ function OverviewTab({ userID }: { userID: string }) {
 				})}
 			</div>
 			<div className="w-full flex items-center justify-between">
-				<OverviewGraph />
+				<OverviewGraph shifts={activeProfileShifts}/>
 				<UpComingShifts shifts={activeProfileShifts} />
 			</div>
+			</>
+			): (
+				<h2 className="w-full text-center my-12">No shifts found for this profile.</h2>
+			)}
 		</>
 	);
 }
