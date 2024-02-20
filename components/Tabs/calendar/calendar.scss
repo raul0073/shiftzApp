@@ -1,0 +1,44 @@
+// calendar
+.react-calendar__month-view__days{
+  
+}
+
+
+// navigation
+.react-calendar__navigation{
+display: flex;
+  width: 100%;
+  padding: 2rem;
+  font-family: 'tahoma';
+  background-color: red;
+  margin: 1rem 0;
+}
+
+// date box
+.react-calendar__tile{
+border: 1px solid gray;
+  padding: 1rem .4rem;
+  text-align: left;
+  transition: .2s ease-in;
+  overflow: hidden;
+  z-index: 100;
+  &:hover{
+    scale: 1.1;
+    background-color:var(--)
+  }
+
+}
+
+
+// week days headers
+.react-calendar__month-view__weekdays__weekday{
+  text-align: left;
+}
+
+// week nubers div
+.react-calendar__month-view__weekNumbers{
+  width: 10px;
+.react-calendar__tile{
+  padding: 0rem;
+}
+}
