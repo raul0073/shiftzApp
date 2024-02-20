@@ -61,7 +61,7 @@ function UserProfile({
 					<UpdateProfile profile={profile} />
 					<DeleteIconWithAlert deleteProfile={deleteProfile} id={String(profile._id)} />
 						<AnimatedTooltip text="Set as default profile">
-						{profile._id && (
+						{profile._id && user.activeProfile !== profile._id && (
 						<Button
 							variant={"ghost"}
 							className=""

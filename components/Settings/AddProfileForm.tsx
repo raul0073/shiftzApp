@@ -50,11 +50,11 @@ function AddProfileForm({ userId, setOpen, profileData }: PropsAddProfile) {
 				setOpen(false);
 			}
 			reset();
-			toast({ title: "Profile added!" });
+			toast({ title: "Profile added!", description: 'You can now add shifts for this profile.' });
 		}
 	};
 	return (
-		<div className="w-full p-2 mb-8">
+		<div className="w-full p-2 mb-8 userprofiles">
 			<h2 className="text-center text-2xl font-semibold mb-8">
 				{profileData ? "Update Profile" : "Add new profile"}
 			</h2>

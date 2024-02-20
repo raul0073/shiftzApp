@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardHeader } from '../../ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card'
 import { ShiftType } from '@/models/shift'
 import { niceDate } from '@/UI-Functions/prettyDate'
 
@@ -11,8 +11,10 @@ function UpComingShifts({shifts}:{shifts: ShiftType[]}) {
   })
   
   return (
-        <Card className='w-full mx-2 p-8 min-h-[350px]'>
-        <CardHeader>Coming Shifts</CardHeader>
+		<Card className="w-full h-fit min-h-[230px] mx-2 p-1 pb-1 overflow-hidden">
+			<CardHeader className="p-4 mb-4">
+				<CardTitle>Coming shifts</CardTitle>
+			</CardHeader>
         <CardContent>
            {filteredShifts.map((shift: ShiftType, index: number)=> {
             return (

@@ -58,7 +58,7 @@ function OverviewTab({ userID }: { userID: string }) {
 					);
 				})}
 			</div>
-			<div className="w-full flex items-center justify-between">
+			<div className="w-full flex items-center justify-center">
 				<OverviewGraph shifts={activeProfileShifts}/>
 				<UpComingShifts shifts={activeProfileShifts} />
 			</div>
