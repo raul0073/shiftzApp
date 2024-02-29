@@ -14,7 +14,7 @@ import { addShift } from "@/lib/features/ShiftsSlice";
 import { addUser } from "@/lib/features/UserSlice";
 import { RootState } from "@/lib/store";
 import { ProfileType } from "@/models/profile";
-import { ShiftType } from "@/models/shift";
+import { ShiftByMonthDTO, ShiftType } from "@/models/shift";
 import { UserType } from "@/models/user";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -39,13 +39,9 @@ function Dashboard({ userId, user }: { userId: string; user: UserType }) {
 		const fetchShifts = async () => {
 			try {
 				const shifts = await getAllShifts(userId);
-
-				if (shifts.length > 0) {
-					// Dispatch the addShift action for each shift
-					shifts.forEach((shift: ShiftType) => {
-						dispatch(addShift(shift));
-					});
-				}
+				shifts?.map((shift: ShiftType) => {
+					dispatch(addShift(shift));
+				  });
 			} catch (error) {
 				console.error(error);
 			}
@@ -60,9 +56,9 @@ function Dashboard({ userId, user }: { userId: string; user: UserType }) {
 
 	if (user.profiles.length !== 0) {
 		return (
-			<Card className="w-[98%] lg:w-[70%] min-h-[90vh] shadow-md shadow-gray-300 dark:shadow-gray-600  my-8 overflow-hidden">
+			<Card className="w-[98%] lg:w-[70%] min-h-[100vh] shadow-md shadow-gray-300 dark:shadow-gray-600  my-8 overflow-hidden">
 				<Header />
-				<CardHeader className="my-4 w-full lg:p-6 p-1">
+				<CardHeader className="my-4 w-full lg:p-6 p-2">
 					<CardTitle className="flex justify-between items-center">
 						<p className="text-2xl font-bold my-4">
 							{tabSelected.toUpperCase()}
@@ -101,7 +97,7 @@ function Dashboard({ userId, user }: { userId: string; user: UserType }) {
 									initial={{ opacity: 0, x: 80 }}
 									whileInView={{ x: 0, opacity: 1 }}
 									transition={{ duration: 0.5 }}>
-									<OverviewTab userID={userId} />
+									<OverviewTab  />
 								</motion.div>
 							)}
 							{tabSelected === "calendar" && (

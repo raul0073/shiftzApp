@@ -16,13 +16,17 @@ function UpComingShifts({shifts}:{shifts: ShiftType[]}) {
 				<CardTitle>Coming shifts</CardTitle>
 			</CardHeader>
         <CardContent>
-           {filteredShifts.map((shift: ShiftType, index: number)=> {
+          {filteredShifts.length > 0 ? (
+           filteredShifts.map((shift: ShiftType, index: number)=> {
             return (
               <div key={index}
               className='border-primary border-b-[.1rem]'
               >{niceDate(shift.shiftDate)}</div>
             )
-           })}
+           })
+          ): (
+            <p> No coming shifts. </p>
+          )}
         </CardContent>
     </Card>
   )

@@ -22,9 +22,10 @@ const handleProfileChange = (selectedValue: string) => {
 }
   return (
     <>
-      <Select onValueChange={handleProfileChange} >
-        <SelectTrigger className="w-[500px]">
-          <SelectValue placeholder="Select User" className="w-fit p-0" />
+      <Select onValueChange={handleProfileChange}>
+        <SelectTrigger className="w-[300px]">
+          <SelectValue
+          placeholder="Select Profile" className="w-fit p-0" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

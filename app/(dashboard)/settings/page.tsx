@@ -29,7 +29,7 @@ function Page() {
 	);
 	return (
 		<section className="w-full flex justify-center my-12">
-			<Card className="w-[90%] lg:w-[70%]">
+			<Card className="w-[98%] lg:w-[70%]">
 				<CardHeader>
 					<CardTitle className="text-xl font-semibold">User Settings</CardTitle>
 

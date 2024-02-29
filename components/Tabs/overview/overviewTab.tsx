@@ -1,3 +1,4 @@
+import { filterShiftsByMonth } from "@/UI-Functions/filterShifts";
 import { calculateWages } from "@/UI-Functions/prettyNumbers";
 import { RootState } from "@/lib/store";
 import { ShiftType } from "@/models/shift";
@@ -14,12 +15,17 @@ type ShiftsData = {
 	averageWage: number;
 };
 
-function OverviewTab({ userID }: { userID: string }) {
-	const activeProfile = useSelector((state: RootState) => state.activeProfile.profile)
+function OverviewTab() {
+	const activeProfile = useSelector(
+		(state: RootState) => state.activeProfile.profile
+	);
+	const month = new Date().getMonth() + 1;
 	const shifts = useSelector((state: RootState) => state.shifts.shifts);
-	const activeProfileShifts = shifts.filter((shift: ShiftType) => shift.userProfileId === activeProfile._id)
+	const activeProfileShifts = filterShiftsByMonth(month, shifts)
+	  .filter((shift: ShiftType) => shift.userProfileId === activeProfile._id);
 
-	const { niceWage, expectedWage, averageWage } = calculateWages(activeProfileShifts)
+	const { niceWage, expectedWage, averageWage } =
+		calculateWages(activeProfileShifts);
 
 	type StatsCard = {
 		title: string;
@@ -48,23 +54,28 @@ function OverviewTab({ userID }: { userID: string }) {
 		<>
 			{activeProfileShifts.length > 0 ? (
 				<>
-
-				<div className="w-full flex flex-col md:flex-row justify-evenly items-center my-4 p-0">
-				{statsCards.map((card: any, index: number) => {
-					return (
-						<Suspense key={index} fallback={<CardSkeleton />}>
-							<StatsCard title={card.title} icon={card.ico} data={card.data} />
-						</Suspense>
-					);
-				})}
-			</div>
-			<div className="w-full flex items-center justify-center">
-				<OverviewGraph shifts={activeProfileShifts}/>
-				<UpComingShifts shifts={activeProfileShifts} />
-			</div>
-			</>
-			): (
-				<h2 className="w-full text-center my-12">No shifts found for this profile.</h2>
+					<div className="w-full flex flex-col md:flex-row justify-evenly items-center my-4 p-1">
+						{statsCards.map((card: any, index: number) => {
+							return (
+								<Suspense key={index} fallback={<CardSkeleton />}>
+									<StatsCard
+										title={card.title}
+										icon={card.ico}
+										data={card.data}
+									/>
+								</Suspense>
+							);
+						})}
+					</div>
+					<div className="w-full flex flex-col md:flex-row items-center justify-center space-y-4">
+						<OverviewGraph shifts={activeProfileShifts} />
+						<UpComingShifts shifts={activeProfileShifts} />
+					</div>
+				</>
+			) : (
+				<h2 className="w-full text-center my-12">
+					No shifts found for this profile.
+				</h2>
 			)}
 		</>
 	);

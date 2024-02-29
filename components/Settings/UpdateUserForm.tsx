@@ -19,7 +19,6 @@ function UpdateUserForm({ user }: { user: UserType }) {
 	} = useForm<updateUserSchema>({ resolver: zodResolver(updateUser) });
 
 	const onSubmit = async (data: updateUserSchema) => {
-		console.log(data);
 		reset();
 	};
 

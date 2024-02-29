@@ -12,7 +12,6 @@ export const getUser = async (id: string | undefined) => {
     }
 
     const user = await res.json()
-    console.log(user.data);
     // return the user proflie
     return user.data
   } catch (err) {

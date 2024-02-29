@@ -38,3 +38,8 @@ export default Shift
 
 
 
+
+
+export type ShiftByMonthDTO = {
+    [month: string]: ShiftType[];
+};

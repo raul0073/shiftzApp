@@ -1,4 +1,3 @@
-
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -25,24 +24,23 @@ export default function RootLayout({
 			<html lang="en" suppressHydrationWarning>
 				<StoreProvider>
 					<body className={inter.className}>
-					<ConfigProvider
-					 theme={{
-      components: {
-       Calendar: {
-        itemActiveBg: '#ededed'
-	   }
-      },
-    }}
-					>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="dark"
-							enableSystem
-							disableTransitionOnChange>
-							{children}
-							<Toaster />
-						</ThemeProvider>
-					</ConfigProvider>
+						<ConfigProvider
+							theme={{
+								components: {
+									Calendar: {
+										itemActiveBg: "#ededed",
+									},
+								},
+							}}>
+							<ThemeProvider
+								attribute="class"
+								defaultTheme="dark"
+								enableSystem
+								disableTransitionOnChange>
+								{children}
+								<Toaster />
+							</ThemeProvider>
+						</ConfigProvider>
 					</body>
 				</StoreProvider>
 			</html>
