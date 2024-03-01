@@ -41,9 +41,9 @@ function UserProfile({
 				const res = await deleteProfileFromDB(userId, id);
 			} catch (error) {
 				console.log(error);
-				toast({ title: "Oops.. Problem deleting profile." });
+				toast({ title: "Oops.. Problem deleting profile. ❌" });
 			} finally {
-				toast({ title: "Profile deleted!" });
+				toast({ title: "Profile deleted! 🗑️" });
 			}
 		}
 	};

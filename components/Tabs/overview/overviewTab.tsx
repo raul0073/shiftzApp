@@ -74,7 +74,7 @@ function OverviewTab() {
 				</>
 			) : (
 				<h2 className="w-full text-center my-12">
-					No shifts found for this profile.
+					Profile has no shifts for this month.
 				</h2>
 			)}
 		</>

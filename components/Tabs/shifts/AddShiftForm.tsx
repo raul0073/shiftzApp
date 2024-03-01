@@ -35,6 +35,7 @@ function AddShiftForm({setOpen} :{setOpen: Dispatch<SetStateAction<boolean>>}) {
 
 	async function onSubmit(values: z.infer<typeof addShiftZod>) {
 		try {
+			console.log(values);
 			if(profile._id){
 			const { newShift }: ShiftType | any = await addShiftToUser(
 				user._id,

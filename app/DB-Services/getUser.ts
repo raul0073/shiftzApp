@@ -4,7 +4,7 @@ const {API_URL} = process.env
 export const getUser = async (id: string | undefined) => {
 
   try {
-
+    
     const res = await fetch(`${API_URL}/api/user/${id}`)
 
     if (!res.ok) {

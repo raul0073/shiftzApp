@@ -19,5 +19,5 @@ export const calculateWages = (shifts: ShiftType[]) => {
 
 
 export const niceNumbers = (number: number) => {
-    return number.toLocaleString('he').split(" . ")[0]
+    return Math.round(Number(number))
 };

@@ -5,7 +5,7 @@ import { WageBreakdownType } from './../app/api/user/[id]/shifts/functions';
 
 // mongoose schema
 const shiftSchema = new Schema({
-    userId: String,
+    userId: String ,
     userProfileId: String,
     shiftDate: Date,
     endTime: Number,

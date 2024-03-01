@@ -12,7 +12,6 @@ export const getAllShifts = async (id: string) => {
     }
 
     const shifts: ShiftType[] = await res.json()
-
     // return the user proflie
     return shifts;
   } catch (err) {

@@ -1,6 +1,7 @@
 import { niceDate } from "@/UI-Functions/prettyDate";
 import { prettyHour } from "@/UI-Functions/prettyHour";
 import { formatDateDifference } from "@/UI-Functions/timeDeff";
+import { deleteShiftById } from "@/app/DB-Services/delShift";
 import {
 	Popover,
 	PopoverContent,
@@ -15,9 +16,12 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { toast } from "@/components/ui/use-toast";
+import { deleteShift } from "@/lib/features/ShiftsSlice";
 import { ShiftType } from "@/models/shift";
 import {
 	Calendar,
+	Check,
 	EditIcon,
 	HandCoins,
 	Hourglass,
@@ -26,11 +30,12 @@ import {
 	TimerOff,
 	Trash2Icon,
 } from "lucide-react";
-import React, { useEffect } from "react";
-import PopoverWageInfo from "./PopoverWageInfo";
-import { deleteShift } from "@/lib/features/ShiftsSlice";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { toast } from "@/components/ui/use-toast";
+import PopoverWageInfo from "./PopoverWageInfo";
+import PopoverEditShift from "./UpdateShiftComp";
+import { niceNumbers } from '@/UI-Functions/prettyNumbers';
+import UpdateShift from "./UpdateShiftComp";
 const today = new Date();
 
 type headerType = {
@@ -50,18 +55,21 @@ const headers = [
 
 function ShiftTable({
 	activeProfileShifts,
+	userID
 }: {
+	userID: string,
 	activeProfileShifts: ShiftType[];
 }) {
     const dispatch = useDispatch();
     const handleDelShift = (id: string) => {
         try{
             dispatch(deleteShift(id))
+			deleteShiftById(userID, id)
         } catch(err){
             console.log(err)
-            toast({title: "Error deleting shift."})
+            toast({title: "Error deleting shift. ❌"})
         }finally{
-            toast({title: "Shift deleted."})
+            toast({title: "Shift deleted. 🗑️"})
         }
     }
 
@@ -95,14 +103,19 @@ function ShiftTable({
 								<TableRow key={index} className="border-b border-muted">
 									<TableCell className="text-left flex flex-col">
 										<p
-											className={`${
+											className={`flex   ${
 												new Date(shift.shiftDate) < today
 													? ""
 													: "text-green-600"
 											}`}>
+												<span className="mr-1">
+
+												{new Date(shift.shiftDate) < today ? <Check color="green" /> : ""}
+												</span>
+
 											{niceDate(shift.shiftDate)}
 										</p>
-										<small className="text-muted-foreground text-xs mt-2">
+										<small className="text-muted-foreground text-xs mt-2 italic">
 											{formatDateDifference(shift.shiftDate)}
 										</small>
 									</TableCell>
@@ -110,8 +123,8 @@ function ShiftTable({
 									<td className="text-center">{prettyHour(shift.endTime)}</td>
 									<td className="text-center">{prettyHour(shift.totalHrs)}</td>
 
-									<td className="text-center">
-										{shift.wage}₪
+									<td className="text-center font-semibold">
+										{niceNumbers(shift.wage)}₪
 										<div className="w-full flex justify-end">
 											<Popover>
 												<PopoverTrigger className="w-fit flex items-center justify-end">
@@ -121,14 +134,14 @@ function ShiftTable({
 													<PopoverWageInfo shift={shift} />
 												</PopoverContent>
 											</Popover>
-
 											<Trash2Icon
 												width={20}
 												color={"red"}
                                                 onClick={()=> handleDelShift(shift._id as string)}
 												className="cursor-pointer text-xs"
 											/>
-											<EditIcon width={20} className="cursor-pointer text-xs" />
+										<UpdateShift shift={shift} />
+											
 										</div>
 									</td>
 								</TableRow>
@@ -137,7 +150,7 @@ function ShiftTable({
 					</>
 				)}
 			</Table>
-			{!activeProfileShifts.length && <h2 className="my-20">No shifts to display.</h2>}
+			{!activeProfileShifts.length && <h2 className="my-20 border border-muted-foreground border-dashed w-full min-h-[40vh] text-center flex justify-center items-center">Profile has no shifts for this month.</h2>}
 		</>
 	);
 }

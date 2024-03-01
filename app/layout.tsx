@@ -20,27 +20,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider publishableKey={clerkKey}>
+		<ClerkProvider>
 			<html lang="en" suppressHydrationWarning>
 				<StoreProvider>
 					<body className={inter.className}>
-						<ConfigProvider
-							theme={{
-								components: {
-									Calendar: {
-										itemActiveBg: "#ededed",
-									},
-								},
-							}}>
+	
 							<ThemeProvider
 								attribute="class"
 								defaultTheme="dark"
 								enableSystem
 								disableTransitionOnChange>
-								{children}
 								<Toaster />
+								{children}
 							</ThemeProvider>
-						</ConfigProvider>
 					</body>
 				</StoreProvider>
 			</html>

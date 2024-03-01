@@ -1,4 +1,3 @@
-
 import connectMongoDB from "@/lib/mongoDB";
 import { ProfileType } from "@/models/profile";
 import Shift, { ShiftType } from "@/models/shift";
@@ -6,33 +5,22 @@ import User, { UserType } from "@/models/user";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { calcTotalWage, calculateTotalHours } from "./functions";
-import { format, parseISO } from "date-fns";
 
 
 
-export async function GET(req: NextRequest, { params }: { params: { id: number } }) {
-    const { id } = params
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+    const { id } = params;
     try {
         await connectMongoDB();
         const shifts: ShiftType[] | null = await Shift.find({ userId: id }).sort({ shiftDate: -1 });
-        // Group shifts by month
+         // Group shifts by month
         const shiftsByMonth: { [month: number]: ShiftType[] } = {};
-        shifts.forEach(shift => {
-            const shiftDate = new Date(shift.shiftDate);
-            const month = shiftDate.getMonth() + 1; // Adding 1 because getMonth() returns values from 0 to 11
-        
-            // Create an array for the month if it doesn't exist
-            if (!shiftsByMonth[month]) {
-                shiftsByMonth[month] = [];
-            }
-        
-            // Add the shift to the corresponding month
-            shiftsByMonth[month].push(shift);
-        });
+  
+
         // Now shiftsByMonth contains the shifts grouped by month
-        return NextResponse.json( shifts )
+        return NextResponse.json(shifts); // Return shiftsByMonth instead of shifts
     } catch (err) {
-        throw new Error('problem getting users' + err)
+        throw new Error('problem getting users' + err);
     }
 }
 

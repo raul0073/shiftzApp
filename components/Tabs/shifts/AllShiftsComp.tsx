@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import ShiftTable from "./ShiftTable";
 import { filterShiftsByMonth } from "@/UI-Functions/filterShifts";
 
-function AllShiftsComp() {
+function AllShiftsComp({userID}: {userID: string}) {
 	const shiftsStore = useSelector((state: RootState) => state.shifts.shifts);
 	const activeProfile = useSelector((state: RootState) => state.activeProfile.profile);
   
@@ -52,7 +52,8 @@ function AllShiftsComp() {
 	return (
 		<>
 			<div className="w-full flex justify-end items-center mb-4">
-				<Select onValueChange={(value) => handleMonthChange(value)}>
+				<Select 
+				onValueChange={(value) => handleMonthChange(value)}>
 					<SelectTrigger className="w-1/2">
 						<SelectValue placeholder="Select month" />
 					</SelectTrigger>
@@ -60,7 +61,10 @@ function AllShiftsComp() {
 						<SelectGroup>
 							<SelectLabel>Select month to display</SelectLabel>
 							{monthNames.map((monthName, index) => (
-								<SelectItem value={`${index + 1}`} key={index} className={`${selectedMonth === index +1 ? 'text-primary': ''}`}>
+								<SelectItem 
+								value={`${index + 1}`} 
+								key={index}
+								 className={`${selectedMonth === index +1 ? 'text-primary': ''}`}>
 									{monthName}
 								</SelectItem>
 							))}
@@ -68,7 +72,7 @@ function AllShiftsComp() {
 					</SelectContent>
 				</Select>
 			</div>
-			<ShiftTable activeProfileShifts={activeProfileShifts} />
+			<ShiftTable activeProfileShifts={activeProfileShifts} userID={userID}/>
 		</>
 	);
 }

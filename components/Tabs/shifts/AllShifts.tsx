@@ -7,7 +7,7 @@ function AllShifts({ userID }: { userID: string }) {
    return (
 
       <Suspense key={userID} fallback={<Loading />}>
-        <AllShiftsComp  />
+        <AllShiftsComp userID={userID} />
       </Suspense>
 
   );
